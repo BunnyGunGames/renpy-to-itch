@@ -6,6 +6,8 @@ This is a Github workflow that publishes your game to Itch by pushing to specifi
 
 
 # Setup
+- [ ] Renpy: Create your game using Renpy 8.1.
+    - Versions previous to 8.1, *might* work.
 
 - [ ] Itch: Create a Itch.io page for your game.
 
@@ -29,6 +31,10 @@ This is a Github workflow that publishes your game to Itch by pushing to specifi
 The work is done by the GitHub workflow file located in .github/workflows/build-and-deploy.yml.
 
 The workflow file calls a special docker image that is preconfigured with the tools to complete the task.
+
+# What build types are supported?
+
+Windows, Mac, Linux, and Web ().
 
 # License 
 
