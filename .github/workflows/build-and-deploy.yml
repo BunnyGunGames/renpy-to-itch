@@ -1,0 +1,67 @@
+on:
+  push:
+    branches:
+      - develop
+      - preview
+      - live
+
+# Job that runs on container image ghcr.io/bunnygungames/renpy-itch:latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/bunnygungames/renpy-itch:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: |
+          #!/usr/bin/env bash
+          
+          # Copy the repo into the SDK folder
+          cp -R /__w/*/* /renpy-*/
+          
+          # enter renpy dir
+          cd /renpy-*/
+        
+          # # Set permission to avoid security issues.
+          # chmod -R +x .
+          
+          # Setup some export vars for lack of better placement
+          export butler_user_slash_game="${{ secrets.BUTLER_USER_SLASH_GAME }}"          
+          
+          # Setup some export more vars by getting data from the game's options.rpy
+          $(python3 renpy_export_project_defines_to_cli.py ${{ github.event.repository.name }} )
+          
+          # output versions
+          echo "project name: ${RENPY_PROJECT_BUILD_NAME}"
+          echo "projet version: ${RENPY_PROJECT_CONFIG_VERSION}"
+
+          # setup Butler
+          export BUTLER_API_KEY=${{ secrets.BUTLER_API_KEY }}
+          echo "Checking Butler version..."
+          butler --version
+
+          # build the project
+          ./renpy.sh launcher distribute ${{ github.event.repository.name }}/ --destination builds
+
+          # build for Web PWA
+          ./renpy.sh launcher web_build_cli ${{github.event.repository.name}}/ --destination ${{github.event.repository.name}}_web
+          
+          ## push the builds to Itch
+
+          # Step into the generated dir to find the web.zip for Butler
+          cd *-dists
+          butler push *.zip ${butler_user_slash_game}:web-${GITHUB_REF_NAME}
+
+          # Step into the builds dir for the rest of the builds.
+          cd ../builds
+
+          # Make it easier to deal with the names by setting up a var
+          export build_file_name=${RENPY_PROJECT_BUILD_NAME}-${RENPY_PROJECT_CONFIG_VERSION}
+          
+          # Push to itch for various build types.
+          
+          butler push ${build_file_name}-win.zip ${butler_user_slash_game}:windows-${GITHUB_REF_NAME}
+          butler push ${build_file_name}-linux.tar.bz2 ${butler_user_slash_game}:linux-${GITHUB_REF_NAME}
+          butler push ${build_file_name}-mac.zip ${butler_user_slash_game}:mac-${GITHUB_REF_NAME}
+          
+          
