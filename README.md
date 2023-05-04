@@ -7,7 +7,7 @@ This is a Github workflow that publishes your game to Itch by pushing to specifi
 
 # Setup
 - [ ] Renpy: Create your game using Renpy 8.1.
-    - Versions previous to 8.1 *might* work.
+    - Versions previous to 8.1 *probably* work.
 
 - [ ] Itch: Create a Itch.io page for your game.
 
