@@ -7,7 +7,7 @@ This is a Github workflow that publishes your game to Itch by pushing to specifi
 
 # Setup
 - [ ] Renpy: Create your game using Renpy 8.1.
-    - Versions previous to 8.1, *might* work.
+    - Versions previous to 8.1 *might* work.
 
 - [ ] Itch: Create a Itch.io page for your game.
 
@@ -15,7 +15,8 @@ This is a Github workflow that publishes your game to Itch by pushing to specifi
 
 - [ ] GitHub: Fill out repo Settings->Secrets and Variables->Actions.
   - [ ] RENPY_SDK_VERSION
-    - ex: 8.1.0
+    - ex: 8.1.0 
+    - Use 8.1.0, do not change it.
   - [ ] BUTLER_USER_SLASH_GAME
     - ex: bunnygun/dirigible-boss
   - [ ] BUTLER_API_KEY
@@ -32,9 +33,11 @@ The work is done by the GitHub workflow file located in .github/workflows/build-
 
 The workflow file calls a special docker image that is preconfigured with the tools to complete the task.
 
+The version of Renpy on the docker image is 8.1.0.
+
 # What build types are supported?
 
-Windows, Mac, Linux, and Web ().
+Windows, Mac, Linux, and Web (PWA).
 
 # License 
 
