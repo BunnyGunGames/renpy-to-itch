@@ -13,12 +13,9 @@ This is a Github workflow that publishes your game to Itch by pushing to specifi
 - [ ] Itch: Create a Itch.io page for your game.
 
 - [ ] GitHub: Add the .github folder from this project to your Github repo. 
-  - This repo include a .gitignore file that is not required but may be helpful if you do not already use one.
+  - This repo includes a .gitignore file that is not required but may be helpful if you do not already use one.
 
 - [ ] GitHub: Fill out repo Settings->Secrets and Variables->Actions.
-  - [ ] RENPY_SDK_VERSION
-    - ex: 8.1.0 
-    - Use 8.1.0, do not change it.
   - [ ] BUTLER_USER_SLASH_GAME
     - ex: bunnygun/dirigible-boss
   - [ ] BUTLER_API_KEY
