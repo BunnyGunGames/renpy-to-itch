@@ -7,7 +7,9 @@ This is a Github workflow that publishes your game to Itch by pushing to specifi
 
 # Setup
 
-- For a video guide on setting up the project, [view this video](https://youtu.be/AjRrpTFw20o)
+- For a quick start guide for new projects, [try this video](https://youtu.be/BycnOyOdSxw).
+- For a video guide on setting up existing projects, [try this video](https://youtu.be/AjRrpTFw20o)
+
 
 - [ ] Renpy: Create your game using Renpy 8.1.
     - Versions previous to 8.1 *probably* work.
